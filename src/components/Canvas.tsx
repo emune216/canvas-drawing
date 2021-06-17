@@ -1,7 +1,18 @@
 import React from "react";
 import styled from "styled-components";
+import { useSelector, useDispatch } from "react-redux";
+
+import { RootState } from "../redux/store";
+import { addPolygon } from "../redux/slices/polygon";
+
+const data = { name: "test", location: [["99", "99"]] };
 
 const Canvas = () => {
+  const dispatch = useDispatch();
+  const { polygon } = useSelector((state: RootState) => state.polygons);
+
+  dispatch(addPolygon(data));
+
   return (
     <CavnasWrapper>
       <span>Canvas</span>
