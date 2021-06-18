@@ -1,13 +1,13 @@
 import React from "react";
 import styled from "styled-components";
 
-import Canvas from "./Canvas";
+import Main from "./Main";
 import List from "./List";
 
 const App = () => {
   return (
     <Appwrapper>
-      <Canvas />
+      <Main />
       <List />
     </Appwrapper>
   );
