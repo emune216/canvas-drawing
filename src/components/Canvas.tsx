@@ -9,6 +9,7 @@ import { addPolygon } from "../redux/slices/polygon";
 
 import Main from "./Main";
 import ZoomButton from "./ZoomButton";
+import DeleteCheckBox from "./DeleteCheckBox";
 
 import Wrapper from "./styles/elements/Wrapper";
 
@@ -32,6 +33,9 @@ const Canvas = () => {
     <Wrapper>
       <CanvasWrapper>
         <Main />
+        <div className="delete-btn-container">
+          <DeleteCheckBox />
+        </div>
         <div className="btn-container">
           <div>
             <ZoomButton icon={<ZoomInIcon />} onClick={zoomIn} />
@@ -54,6 +58,12 @@ const CanvasWrapper = styled.div`
   @media only screen and (max-width: 600px)  {
     height: 100%;
     margin: 1rem;
+  }
+
+  .delete-btn-container {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
   }
 
   .btn-container {

@@ -26,7 +26,7 @@ const ListWrapper = styled.div`
 const Wrapper = styled.div`
   @media only screen and (max-width: 600px) {
     width: 100%;
-    height: 20%;
+    height: 50%;
   }
   @media only screen and (min-width: 600px)  {
     width: 30%;
