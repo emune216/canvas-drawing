@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import ZoomInIcon from "@material-ui/icons/ZoomIn";
 import ZoomOutIcon from "@material-ui/icons/ZoomOut";
 
@@ -16,10 +16,7 @@ import Wrapper from "./styles/elements/Wrapper";
 const data = { name: "test", location: [["99", "99"]] };
 
 const Canvas = () => {
-  const dispatch = useDispatch();
   const { polygon } = useSelector((state: RootState) => state.polygons);
-
-  dispatch(addPolygon(data));
 
   const zoomIn = () => {
     console.log("In");
