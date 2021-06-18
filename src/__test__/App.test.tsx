@@ -1,13 +1,21 @@
-import { render, screen } from "@testing-library/react";
+import { render } from "@testing-library/react";
 import "@testing-library/jest-dom";
+import configureMockStore from "redux-mock-store";
+import { Provider } from "react-redux";
+
 import App from "../components/App";
 
-const CANVAS = "Canvas";
-const LIST = "List";
+const mockStore = configureMockStore();
+const store = mockStore({
+  polygons: {
+    polygon: {},
+  },
+});
 
-test("renders title", () => {
-  render(<App />);
-
-  expect(screen.getByText(CANVAS)).toBeInTheDocument();
-  expect(screen.getByText(LIST)).toBeInTheDocument();
+test("renders App", () => {
+  render(
+    <Provider store={store}>
+      <App />
+    </Provider>
+  );
 });
