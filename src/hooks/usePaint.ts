@@ -6,7 +6,7 @@ import drawLine from "../functions/drawLine";
 
 import { RootState } from "../redux/store";
 
-import { addPolygon } from "../redux/slices/polygon";
+import { addPolygon } from "../redux/reducers/polygon";
 
 type Coordinate = {
   x: number;

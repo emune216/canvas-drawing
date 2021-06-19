@@ -3,10 +3,12 @@ import { useDispatch } from "react-redux";
 import { configureStore } from "@reduxjs/toolkit";
 import { createLogger } from "redux-logger";
 
-import polygonReducer from "./slices/polygon";
+import polygonReducer from "./reducers/polygon";
+import canvasModeReducer from "./reducers/canvasMode";
 
 const reducer = combineReducers({
   polygons: polygonReducer,
+  canvasMode: canvasModeReducer,
 });
 
 const middleware = [];
