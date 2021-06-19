@@ -4,20 +4,20 @@ import addEventHelperGenerator from "../helper/addEventHelperGenerator";
 import removeEventHelperGenerator from "../helper/removeEventHelperGenerator";
 
 import useCanvas from "../hooks/useCanvas";
-import useMouseEvent from "../hooks/useMouseEvent";
+import usePaint from "../hooks/usePaint";
 
 import Wrapper from "./styles/elements/Wrapper";
 
 const Canvas = () => {
-  const { startPaint, paint, endPaint } = useMouseEvent();
+  const { startPaint, paint, endPaint } = usePaint();
 
   const addEventHelper: Function = addEventHelperGenerator(startPaint, paint, endPaint);
   const removeEventHelper: Function = removeEventHelperGenerator(startPaint, paint, endPaint);
 
-  const canvasRef = useCanvas(addEventHelper, removeEventHelper);
+  const { canvasRef, parentRef } = useCanvas(addEventHelper, removeEventHelper);
 
   return (
-    <Wrapper>
+    <Wrapper ref={parentRef}>
       <canvas ref={canvasRef} />
     </Wrapper>
   );

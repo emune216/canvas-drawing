@@ -4,11 +4,12 @@ import fitToContainer from "../functions/fitToContainer";
 
 const useCanvas = (addEventHelper: Function, removeEventHelper: Function) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const parentRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    if (!canvasRef.current) return;
+    if (canvasRef.current === null || parentRef.current === null) return;
 
-    fitToContainer(canvasRef.current);
+    fitToContainer(canvasRef.current, parentRef.current);
 
     const canvas: HTMLCanvasElement = canvasRef.current;
     addEventHelper(canvas, canvasRef.current);
@@ -18,7 +19,7 @@ const useCanvas = (addEventHelper: Function, removeEventHelper: Function) => {
     };
   }, []);
 
-  return canvasRef;
+  return { canvasRef, parentRef };
 };
 
 export default useCanvas;

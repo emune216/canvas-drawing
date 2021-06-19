@@ -11,8 +11,8 @@ const removeEventHelperGenerator = (
 
     canvas.removeEventListener("mousedown", (event: MouseEvent) => { startPaint(event, canvasCurrent) });
     canvas.removeEventListener("mousemove", (event: MouseEvent) => { paint(event, canvasCurrent) });
-    canvas.removeEventListener("mouseup", () => { endPaint() });
-    canvas.removeEventListener("mouseleave", () => { endPaint() });
+    canvas.removeEventListener("mouseup", () => { endPaint(canvasCurrent) });
+    canvas.removeEventListener("mouseleave", () => { endPaint(canvasCurrent) });
   }
 };
 

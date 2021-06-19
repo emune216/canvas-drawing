@@ -1,11 +1,8 @@
-const fitToContainer = (canvas: HTMLCanvasElement | null) => {
-  if (canvas === null) return;
+const fitToContainer = (canvas: HTMLCanvasElement | null, parent: HTMLDivElement | null) => {
+  if (canvas === null || parent === null) return;
 
-  canvas.style.width = "100%";
-  canvas.style.height = "100%";
-
-  canvas.width  = canvas.offsetWidth;
-  canvas.height = canvas.offsetHeight;
+  canvas.width  = parent.offsetWidth;
+  canvas.height = parent.offsetHeight;
 };
 
 export default fitToContainer;

@@ -1,10 +1,18 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 
+import { RootState } from "../redux/store";
+
 const List = () => {
+  const polygons = useSelector((state: RootState) => state.polygons.polygon);
+
   return (
     <Wrapper>
       <ListWrapper>
+        <ul>
+          {Object.keys(polygons).map(order => <li key={order}>{`Polygon ${order}`}</li>)}
+        </ul>
       </ListWrapper>
     </Wrapper>
   );
