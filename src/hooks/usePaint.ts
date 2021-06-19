@@ -1,7 +1,12 @@
 import { useState, useEffect, useRef } from "react";
+import { useSelector, useDispatch } from "react-redux";
 
 import getCoordinates from "../functions/getCoordinates";
-import draw from "../functions/draw";
+import drawLine from "../functions/drawLine";
+
+import { RootState } from "../redux/store";
+
+import { addPolygon } from "../redux/slices/polygon";
 
 type Coordinate = {
   x: number;
@@ -11,6 +16,8 @@ type Coordinate = {
 let isDraw = false;
 
 const usePaint = () => {
+  const dispatch = useDispatch();
+  const polygons = useSelector((state: RootState) => state.polygons.polygon);
   const [polygon, setPolygon] = useState<Array<Object>>([]);
   let initCoordinateRef: Coordinate | any = useRef(null);
   let coordinateRef: Coordinate | any = useRef(null);
@@ -34,7 +41,7 @@ const usePaint = () => {
     const currentCoordinates: Coordinate | undefined = getCoordinates(event, canvas);
 
     if (isDraw && currentCoordinates) {
-      draw(coordinateRef, currentCoordinates, canvas);
+      drawLine(coordinateRef, currentCoordinates, canvas);
       coordinateRef = currentCoordinates;
       setPolygon((prev: Array<Object>) => [...prev, currentCoordinates]);
     }
@@ -43,7 +50,7 @@ const usePaint = () => {
   const endPaint = (canvas: HTMLCanvasElement | null) => {
     if (isDraw) {
       isDraw = false;
-      draw(coordinateRef, initCoordinateRef, canvas);
+      drawLine(coordinateRef, initCoordinateRef, canvas);
       setPolygon((prev: Array<Object>) => [...prev, prev[0]]);
 
       initCoordinateRef = null;
@@ -53,9 +60,11 @@ const usePaint = () => {
 
   useEffect(() => {
     if (!isDraw && polygon.length) {
+      const polygonCount = Object.keys(polygons).length;
+      dispatch(addPolygon({ order: polygonCount + 1, location: polygon }))
       setPolygon([]);
     }
-  }, [polygon]);
+  }, [polygon, polygons]);
 
   return {
     startPaint,
