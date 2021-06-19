@@ -12,10 +12,10 @@ const useCanvas = (addEventHelper: Function, removeEventHelper: Function) => {
     fitToContainer(canvasRef.current, parentRef.current);
 
     const canvas: HTMLCanvasElement = canvasRef.current;
-    addEventHelper(canvas, canvasRef.current);
+    addEventHelper(canvas);
 
     return () => {
-      removeEventHelper(canvas, canvasRef.current);
+      removeEventHelper(canvas);
     };
   }, []);
 

@@ -3,16 +3,15 @@ const removeEventHelperGenerator = (
   paint: Function,
   endPaint: Function,
 ): Function => {
-  return function (
-    canvas: HTMLCanvasElement | null,
+  return (
     canvasCurrent: HTMLCanvasElement | null,
-  ) {
-    if (canvas === null) return;
+  ) => {
+    if (canvasCurrent === null) return;
 
-    canvas.removeEventListener("mousedown", (event: MouseEvent) => { startPaint(event, canvasCurrent) });
-    canvas.removeEventListener("mousemove", (event: MouseEvent) => { paint(event, canvasCurrent) });
-    canvas.removeEventListener("mouseup", () => { endPaint(canvasCurrent) });
-    canvas.removeEventListener("mouseleave", () => { endPaint(canvasCurrent) });
+    canvasCurrent.removeEventListener("mousedown", (event: MouseEvent) => { startPaint(event, canvasCurrent) }, false);
+    canvasCurrent.removeEventListener("mousemove", (event: MouseEvent) => { paint(event, canvasCurrent) }, false);
+    canvasCurrent.removeEventListener("mouseup", () => { endPaint(canvasCurrent) }, false);
+    canvasCurrent.removeEventListener("mouseleave", () => { endPaint(canvasCurrent) }, false);
   }
 };
 

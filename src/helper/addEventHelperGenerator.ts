@@ -3,16 +3,15 @@ const addEventHelperGenerator = (
   paint: Function,
   endPaint: Function,
 ): Function => {
-  return function (
-    canvas: HTMLCanvasElement | null,
+  return (
     canvasCurrent: HTMLCanvasElement | null,
-  ) {
-    if (canvas === null) return;
+  ) => {
+    if (canvasCurrent === null) return;
 
-    canvas.addEventListener("mousedown", (event: MouseEvent) => { startPaint(event, canvasCurrent) });
-    canvas.addEventListener("mousemove", (event: MouseEvent) => { paint(event, canvasCurrent) });
-    canvas.addEventListener("mouseup", () => { endPaint(canvasCurrent) });
-    canvas.addEventListener("mouseleave", () => { endPaint(canvasCurrent) });
+    canvasCurrent.addEventListener("mousedown", (event: MouseEvent) => { startPaint(event, canvasCurrent) }, false);
+    canvasCurrent.addEventListener("mousemove", (event: MouseEvent) => { paint(event, canvasCurrent) }, false);
+    canvasCurrent.addEventListener("mouseup", () => { endPaint(canvasCurrent) }, false);
+    canvasCurrent.addEventListener("mouseleave", () => { endPaint(canvasCurrent) }, false);
   }
 };
 
