@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 type TPayload = {
-  name: string;
-  location: Array<Array<string>>;
+  order: number;
+  location: Array<Object>;
 };
 
 const initialState = {
@@ -11,7 +11,7 @@ const initialState = {
 
 const reducers = {
   addPolygon: (state: any, { payload }: PayloadAction<TPayload>) => {
-    state.polygon[payload.name] = payload.location;
+    state.polygon[payload.order] = payload.location;
   },
 };
 
