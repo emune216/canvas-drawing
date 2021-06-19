@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 
 import getCoordinates from "../functions/getCoordinates";
 import draw from "../functions/draw";
@@ -10,9 +10,10 @@ type Coordinate = {
 
 let isDraw = false;
 
-const useMouseEvent = () => {
+const usePaint = () => {
   const [polygon, setPolygon] = useState<Array<Object>>([]);
-  let coordinateRef: Coordinate | any = useRef({});
+  let initCoordinateRef: Coordinate | any = useRef(null);
+  let coordinateRef: Coordinate | any = useRef(null);
 
   const startPaint = (event: MouseEvent, canvas: HTMLCanvasElement | null) => {
     if (canvas === null) return;
@@ -21,6 +22,7 @@ const useMouseEvent = () => {
 
     const currentCoordinates: Coordinate | undefined = getCoordinates(event, canvas);
     if (currentCoordinates) {
+      initCoordinateRef = currentCoordinates;
       coordinateRef = currentCoordinates;
       setPolygon((prev: Array<Object>) => [...prev, currentCoordinates]);
     };
@@ -34,13 +36,26 @@ const useMouseEvent = () => {
     if (isDraw && currentCoordinates) {
       draw(coordinateRef, currentCoordinates, canvas);
       coordinateRef = currentCoordinates;
+      setPolygon((prev: Array<Object>) => [...prev, currentCoordinates]);
     }
   };
 
-  const endPaint = () => {
-    isDraw = false;
-    coordinateRef = {};
+  const endPaint = (canvas: HTMLCanvasElement | null) => {
+    if (isDraw) {
+      isDraw = false;
+      draw(coordinateRef, initCoordinateRef, canvas);
+      setPolygon((prev: Array<Object>) => [...prev, prev[0]]);
+
+      initCoordinateRef = null;
+      coordinateRef = null;
+    }
   };
+
+  useEffect(() => {
+    if (!isDraw && polygon.length) {
+      setPolygon([]);
+    }
+  }, [polygon]);
 
   return {
     startPaint,
@@ -49,4 +64,4 @@ const useMouseEvent = () => {
   };
 };
 
-export default useMouseEvent;
+export default usePaint;
