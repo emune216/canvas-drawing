@@ -7,16 +7,12 @@ import Canvas from "./Canvas";
 import ZoomButton from "./ZoomButton";
 import DeleteCheckBox from "./DeleteCheckBox";
 
+import useZoom from "../hooks/useZoom";
+
 import Wrapper from "./styles/elements/Wrapper";
 
 const Main = () => {
-  const zoomIn = () => {
-    console.log("In");
-  };
-
-  const zoomOut = () => {
-    console.log("Out");
-  };
+  const { zoomIn, zoomOut } = useZoom();
 
   return (
     <Wrapper>
