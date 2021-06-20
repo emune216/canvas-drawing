@@ -8,6 +8,7 @@ import makePolygonRange from "../functions/makePolygonRange";
 
 import { RootState } from "../redux/store";
 import { addPolygon, deletePolygon } from "../redux/reducers/polygon";
+import { changeMagnification } from "../redux/reducers/canvasStatus";
 
 type Coordinate = {
   x: number;
@@ -34,7 +35,7 @@ let polygonSet: Array<RangeSet> = [] as Array<RangeSet>;
 
 const usePaint = () => {
   const dispatch = useDispatch();
-  const { isDeleteMode } = useSelector((state: RootState) => state.canvasMode);
+  const { isDeleteMode } = useSelector((state: RootState) => state.canvasStatus);
   const polygons = useSelector((state: RootState) => state.polygons.polygon);
   const [polygon, setPolygon] = useState<Array<Object>>([]);
   const [range, setRange] = useState<Range>({} as Range);
@@ -47,6 +48,7 @@ const usePaint = () => {
     if (canvas === null) return;
 
     isDraw = true;
+    dispatch(changeMagnification(1));
 
     const currentCoordinates: Coordinate | undefined = getCoordinates(event, canvas);
 
@@ -95,6 +97,8 @@ const usePaint = () => {
   const choosePolygon = (event: MouseEvent, canvas: HTMLCanvasElement | null) => {
     if (!isDelete) return;
     if (canvas === null) return;
+
+    dispatch(changeMagnification(1));
 
     const currentCoordinates: Coordinate | undefined = getCoordinates(event, canvas);
     if (!currentCoordinates) return;

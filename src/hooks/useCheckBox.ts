@@ -1,7 +1,7 @@
 import { useState, useEffect, ChangeEvent } from "react";
 import { useDispatch } from "react-redux";
 
-import { changeCanvasMode } from "../redux/reducers/canvasMode";
+import { changeCanvasMode } from "../redux/reducers/canvasStatus";
 
 const useCheckBox = () => {
   const dispatch = useDispatch();
