@@ -5,7 +5,7 @@ import ZoomInIcon from "@material-ui/icons/ZoomIn";
 
 import ZoomButton from "../components/ZoomButton";
 
-test("renders button", () => {
+test("should clicked button", () => {
   let isClicked = false;
 
   render(<ZoomButton icon={<ZoomInIcon />} onClick={() => { isClicked = true}} />);

@@ -15,3 +15,9 @@ export type RangeSet = {
   range: Range;
   coordinates: Array<Coordinate>;
 };
+
+export type Polygon = {
+  order: number;
+  range: Object;
+  coordinates: Array<Object>;
+};
