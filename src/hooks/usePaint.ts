@@ -22,12 +22,14 @@ type Range = {
 };
 
 type RangeSet = {
+  order: number;
   range: Range;
   coordinates: Array<Coordinate>;
 };
 
 let isDraw: Boolean = false;
 let isDelete: Boolean = false;
+let count: number = 0;
 let polygonSet: Array<RangeSet> = [] as Array<RangeSet>;
 
 const usePaint = () => {
@@ -103,7 +105,7 @@ const usePaint = () => {
 
   useEffect(() => {
     if (!isDraw && polygon.length) {
-      dispatch(addPolygon({ range, coordinates: polygon }));
+      dispatch(addPolygon({ order: ++count, range, coordinates: polygon }));
       setPolygon([]);
     }
   }, [polygon, range]);

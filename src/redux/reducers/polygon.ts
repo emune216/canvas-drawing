@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 type Polygon = {
+  order: number;
   range: Object;
   coordinates: Array<Object>;
 };
@@ -13,8 +14,8 @@ const reducers = {
   addPolygon: (state: any, { payload }: PayloadAction<Polygon>) => {
     state.polygon = [...state.polygon, payload];
   },
-  deletePolygon: (state: any, { payload }: PayloadAction<Number>) => {
-    state.polygon = state.polygon.filter((_: Polygon, idx: Number) => idx !== payload);
+  deletePolygon: (state: any, { payload }: PayloadAction<number>) => {
+    state.polygon = state.polygon.filter((polygon: Polygon) => polygon.order !== payload);
   },
 };
 
