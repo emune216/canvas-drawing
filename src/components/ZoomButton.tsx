@@ -1,12 +1,12 @@
 import React from "react";
 import { Button, SvgIconProps } from "@material-ui/core";
 
-type props = {
+type ZoomButtonProps = {
   icon: SvgIconProps;
   onClick: React.MouseEventHandler<HTMLButtonElement>;
 };
 
-const ZoomButton = ({ icon, onClick }: props) => {
+const ZoomButton = ({ icon, onClick }: ZoomButtonProps) => {
   return (
     <Button
       variant="contained"
