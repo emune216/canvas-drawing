@@ -5,6 +5,7 @@ import removeEventHelperGenerator from "../helpers/removeEventHelperGenerator";
 
 import useCanvas from "../hooks/useCanvas";
 import usePaint from "../hooks/usePaint";
+import useRepaintCanvas from "../hooks/useRepaintCanvas";
 
 import Wrapper from "./styles/elements/Wrapper";
 
@@ -15,6 +16,7 @@ const Canvas = () => {
   const removeEventHelper: Function = removeEventHelperGenerator(startPaint, paint, endPaint, choosePolygon);
 
   const { canvasRef, parentRef } = useCanvas(addEventHelper, removeEventHelper);
+  useRepaintCanvas(canvasRef);
 
   return (
     <Wrapper ref={parentRef}>
