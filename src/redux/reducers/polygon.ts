@@ -1,20 +1,20 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-type TPayload = {
-  order: number;
-  data: {
-    range: Object;
-    coordinates: Array<Object>;
-  };
+type Polygon = {
+  range: Object;
+  coordinates: Array<Object>;
 };
 
 const initialState = {
-  polygon: {},
+  polygon: [],
 };
 
 const reducers = {
-  addPolygon: (state: any, { payload }: PayloadAction<TPayload>) => {
-    state.polygon[payload.order] = payload.data;
+  addPolygon: (state: any, { payload }: PayloadAction<Polygon>) => {
+    state.polygon = [...state.polygon, payload];
+  },
+  deletePolygon: (state: any, { payload }: PayloadAction<Number>) => {
+    state.polygon = state.polygon.filter((_: Polygon, idx: Number) => idx !== payload);
   },
 };
 
@@ -24,6 +24,6 @@ const polygonSlice = createSlice({
   reducers,
 });
 
-export const { addPolygon } = polygonSlice.actions;
+export const { addPolygon, deletePolygon } = polygonSlice.actions;
 
 export default polygonSlice.reducer;

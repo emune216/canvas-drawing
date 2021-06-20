@@ -10,7 +10,7 @@ type Range = {
   W: Number;
 };
 
-const makeRange = (range: Range, coordinate: Coordinate, init: Boolean) => {
+const makeRange = (range: Range, coordinate: Coordinate, init: Boolean): Range => {
   const { x, y } = coordinate;
 
   if (init) {
@@ -24,10 +24,10 @@ const makeRange = (range: Range, coordinate: Coordinate, init: Boolean) => {
     return range;
   };
 
-  if (x > range.E) range.E = x;
-  if (x < range.W) range.W = x;
   if (y > range.N) range.N = y;
+  if (x > range.E) range.E = x;
   if (y < range.S) range.S = y;
+  if (x < range.W) range.W = x;
 
   return range;
 };

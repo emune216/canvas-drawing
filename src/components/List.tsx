@@ -11,7 +11,7 @@ const List = () => {
     <Wrapper>
       <ListWrapper>
         <ul>
-          {Object.keys(polygons).map(order => <li key={order}>{`Polygon ${order}`}</li>)}
+          {polygons.map((_, idx) => <li key={idx}>{`Polygon ${idx + 1}`}</li>)}
         </ul>
       </ListWrapper>
     </Wrapper>

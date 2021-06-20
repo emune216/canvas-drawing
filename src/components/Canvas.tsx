@@ -1,7 +1,7 @@
 import React from "react";
 
-import addEventHelperGenerator from "../helper/addEventHelperGenerator";
-import removeEventHelperGenerator from "../helper/removeEventHelperGenerator";
+import addEventHelperGenerator from "../helpers/addEventHelperGenerator";
+import removeEventHelperGenerator from "../helpers/removeEventHelperGenerator";
 
 import useCanvas from "../hooks/useCanvas";
 import usePaint from "../hooks/usePaint";
@@ -9,10 +9,10 @@ import usePaint from "../hooks/usePaint";
 import Wrapper from "./styles/elements/Wrapper";
 
 const Canvas = () => {
-  const { startPaint, paint, endPaint } = usePaint();
+  const { startPaint, paint, endPaint, choosePolygon } = usePaint();
 
-  const addEventHelper: Function = addEventHelperGenerator(startPaint, paint, endPaint);
-  const removeEventHelper: Function = removeEventHelperGenerator(startPaint, paint, endPaint);
+  const addEventHelper: Function = addEventHelperGenerator(startPaint, paint, endPaint, choosePolygon);
+  const removeEventHelper: Function = removeEventHelperGenerator(startPaint, paint, endPaint, choosePolygon);
 
   const { canvasRef, parentRef } = useCanvas(addEventHelper, removeEventHelper);
 
