@@ -1,29 +1,32 @@
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 
-import { changeMagnification } from "../redux/reducers/canvasStatus";
+import { changeMagnification, changeCurrentMagnification } from "../redux/reducers/canvasStatus";
 
 const ZOOM_IN: number = 1.1;
 const ZOOM_OUT: number = 0.9;
 
 const useZoom = () => {
   const dispatch = useDispatch();
-  const [magnification, setMagnification] = useState<number>(1);
-  const [isChangeZoom, setIsChangeZoom] = useState<Boolean>(false);
+  const [magnification, setMagnification] = useState<number>(0);
+  const [currentMagnification, setCurrentMagnification] = useState<number>(1);
 
   const zoomIn = () => {
     setMagnification(ZOOM_IN);
-    setIsChangeZoom((prev: Boolean) => !prev);
+    setCurrentMagnification((prev: number) => prev + 0.1);
   };
 
   const zoomOut = () => {
     setMagnification(ZOOM_OUT);
-    setIsChangeZoom((prev: Boolean) => !prev);
+    setCurrentMagnification((prev: number) => prev - 0.1);
   };
 
   useEffect(() => {
+    if (!magnification) return;
+
     dispatch(changeMagnification(magnification));
-  }, [magnification, isChangeZoom]);
+    dispatch(changeCurrentMagnification(currentMagnification));
+  }, [magnification, currentMagnification]);
 
   return {
     zoomIn,

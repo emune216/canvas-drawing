@@ -6,7 +6,7 @@ import { RootState } from "../redux/store";
 import drawPolygons from "../functions/drawPolygons";
 
 const useRepaintCanvas = (canvas: MutableRefObject<HTMLCanvasElement | null>) => {
-  const { magnification, isChangeZoom } = useSelector((state: RootState) => state.canvasStatus);
+  const { magnification, currentMagnification } = useSelector((state: RootState) => state.canvasStatus);
   const polygons = useSelector((state: RootState) => state.polygons.polygon);
 
   useEffect(() => {
@@ -26,7 +26,7 @@ const useRepaintCanvas = (canvas: MutableRefObject<HTMLCanvasElement | null>) =>
     polygons.forEach(polygon => {
       drawPolygons(context, polygon);
     });
-  }, [polygons, magnification, isChangeZoom]);
+  }, [polygons, magnification, currentMagnification]);
 };
 
 export default useRepaintCanvas;

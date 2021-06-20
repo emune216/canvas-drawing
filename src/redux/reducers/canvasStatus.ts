@@ -3,7 +3,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 const initialState = {
   isDeleteMode: false,
   magnification: 1,
-  isChangeZoom: false,
+  currentMagnification: 1,
 };
 
 const reducers = {
@@ -12,7 +12,9 @@ const reducers = {
   },
   changeMagnification: (state: any, { payload }: PayloadAction<number>) => {
     state.magnification = payload;
-    state.isChangeZoom = !state.isChangeZoom;
+  },
+  changeCurrentMagnification: (state: any, { payload }: PayloadAction<number>) => {
+    state.currentMagnification = payload;
   },
 };
 
@@ -22,6 +24,10 @@ const canvasStatus = createSlice({
   reducers,
 });
 
-export const { changeCanvasMode, changeMagnification } = canvasStatus.actions;
+export const {
+  changeCanvasMode,
+  changeMagnification,
+  changeCurrentMagnification,
+} = canvasStatus.actions;
 
 export default canvasStatus.reducer;
