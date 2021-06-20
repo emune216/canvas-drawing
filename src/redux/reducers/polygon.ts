@@ -1,10 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-type Polygon = {
-  order: number;
-  range: Object;
-  coordinates: Array<Object>;
-};
+import { Polygon } from "../../types";
 
 const initialState = {
   polygon: [],
