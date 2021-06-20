@@ -19,7 +19,7 @@ test("renders App", () => {
   const text = screen.getByText("Delete Mode");
   expect(text).toBeTruthy();
 
-  const btn = screen.getByLabelText("delete-check-box");
+  const btn = screen.getByLabelText("delete-check-box") as HTMLInputElement;
   expect(btn.checked).toBe(false);
   userEvent.click(btn);
   expect(btn.checked).toBe(true);
