@@ -1,7 +1,4 @@
-type Coordinate = {
-  x: number;
-  y: number;
-};
+import { Coordinate } from "../types";
 
 const draw = (
   prevMousePosition: Coordinate,
