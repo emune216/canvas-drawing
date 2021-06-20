@@ -4,6 +4,12 @@ import styled from "styled-components";
 
 import { RootState } from "../redux/store";
 
+type Polygon = {
+  order: number;
+  range: Object;
+  coordinates: Array<Object>;
+};
+
 const List = () => {
   const polygons = useSelector((state: RootState) => state.polygons.polygon);
 
@@ -11,7 +17,7 @@ const List = () => {
     <Wrapper>
       <ListWrapper>
         <ul>
-          {Object.keys(polygons).map(order => <li key={order}>{`Polygon ${order}`}</li>)}
+          {polygons.map((polygon: Polygon) => <li key={polygon.order}>{`Polygon ${polygon.order}`}</li>)}
         </ul>
       </ListWrapper>
     </Wrapper>
