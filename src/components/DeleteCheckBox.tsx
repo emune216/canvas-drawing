@@ -3,12 +3,18 @@ import styled from "styled-components";
 
 import Wrapper from "./styles/elements/Wrapper";
 
+import useCheckBox from "../hooks/useCheckBox";
+
 const DeleteCheckBox = () => {
+  const { checkBoxValue, handleChange } = useCheckBox();
+
   return (
     <Wrapper>
       <Label>
         <Input
           type="checkbox"
+          checked={checkBoxValue}
+          onChange={handleChange}
         />
         <span>Delete Mode</span>
       </Label>

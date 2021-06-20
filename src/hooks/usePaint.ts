@@ -3,39 +3,67 @@ import { useSelector, useDispatch } from "react-redux";
 
 import getCoordinates from "../functions/getCoordinates";
 import drawLine from "../functions/drawLine";
+import checkPolygonRange from "../functions/checkPolygonRange";
+import makePolygonRange from "../functions/makePolygonRange";
 
 import { RootState } from "../redux/store";
-
-import { addPolygon } from "../redux/slices/polygon";
+import { addPolygon, deletePolygon } from "../redux/reducers/polygon";
 
 type Coordinate = {
   x: number;
   y: number;
 };
 
-let isDraw = false;
+type Range = {
+  N: Number;
+  E: Number;
+  S: Number;
+  W: Number;
+};
+
+type RangeSet = {
+  order: number;
+  range: Range;
+  coordinates: Array<Coordinate>;
+};
+
+let isDraw: Boolean = false;
+let isDelete: Boolean = false;
+let count: number = 0;
+let polygonSet: Array<RangeSet> = [] as Array<RangeSet>;
 
 const usePaint = () => {
   const dispatch = useDispatch();
+  const { isDeleteMode } = useSelector((state: RootState) => state.canvasMode);
   const polygons = useSelector((state: RootState) => state.polygons.polygon);
   const [polygon, setPolygon] = useState<Array<Object>>([]);
+  const [range, setRange] = useState<Range>({} as Range);
   let initCoordinateRef: Coordinate | any = useRef(null);
   let coordinateRef: Coordinate | any = useRef(null);
+  let rangeRef: Range | any = useRef(null);
 
   const startPaint = (event: MouseEvent, canvas: HTMLCanvasElement | null) => {
+    if (isDelete) return;
     if (canvas === null) return;
 
     isDraw = true;
 
     const currentCoordinates: Coordinate | undefined = getCoordinates(event, canvas);
+
     if (currentCoordinates) {
       initCoordinateRef = currentCoordinates;
       coordinateRef = currentCoordinates;
+
+      const range = makePolygonRange(rangeRef, currentCoordinates, true);
+
+      rangeRef = range;
+      setRange(range);
       setPolygon((prev: Array<Object>) => [...prev, currentCoordinates]);
     };
   };
 
   const paint = (event: MouseEvent, canvas: HTMLCanvasElement | null) => {
+    if (isDelete) return;
     if (canvas === null) return;
 
     const currentCoordinates: Coordinate | undefined = getCoordinates(event, canvas);
@@ -43,11 +71,17 @@ const usePaint = () => {
     if (isDraw && currentCoordinates) {
       drawLine(coordinateRef, currentCoordinates, canvas);
       coordinateRef = currentCoordinates;
+
+      const range = makePolygonRange(rangeRef, currentCoordinates, false);
+
+      rangeRef = range;
+      setRange(range);
       setPolygon((prev: Array<Object>) => [...prev, currentCoordinates]);
     }
   };
 
   const endPaint = (canvas: HTMLCanvasElement | null) => {
+    if (isDelete) return;
     if (isDraw) {
       isDraw = false;
       drawLine(coordinateRef, initCoordinateRef, canvas);
@@ -58,18 +92,34 @@ const usePaint = () => {
     }
   };
 
+  const choosePolygon = (event: MouseEvent, canvas: HTMLCanvasElement | null) => {
+    if (!isDelete) return;
+    if (canvas === null) return;
+
+    const currentCoordinates: Coordinate | undefined = getCoordinates(event, canvas);
+    if (!currentCoordinates) return;
+
+    const target = checkPolygonRange(currentCoordinates, polygonSet);
+    if (target !== undefined) dispatch(deletePolygon(target));
+  };
+
   useEffect(() => {
     if (!isDraw && polygon.length) {
-      const polygonCount = Object.keys(polygons).length;
-      dispatch(addPolygon({ order: polygonCount + 1, location: polygon }))
+      dispatch(addPolygon({ order: ++count, range, coordinates: polygon }));
       setPolygon([]);
     }
-  }, [polygon, polygons]);
+  }, [polygon, range]);
+
+  useEffect(() => {
+    isDelete = isDeleteMode;
+    polygonSet = polygons;
+  }, [isDeleteMode, polygons]);
 
   return {
     startPaint,
     paint,
     endPaint,
+    choosePolygon,
   };
 };
 
