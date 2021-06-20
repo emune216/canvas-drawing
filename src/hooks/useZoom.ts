@@ -5,6 +5,7 @@ import { changeMagnification, changeCurrentMagnification } from "../redux/reduce
 
 const ZOOM_IN: number = 1.1;
 const ZOOM_OUT: number = 0.9;
+const TIMES: number = 0.1
 
 const useZoom = () => {
   const dispatch = useDispatch();
@@ -13,12 +14,12 @@ const useZoom = () => {
 
   const zoomIn = () => {
     setMagnification(ZOOM_IN);
-    setCurrentMagnification((prev: number) => prev + 0.1);
+    setCurrentMagnification((prev: number) => prev + TIMES);
   };
 
   const zoomOut = () => {
     setMagnification(ZOOM_OUT);
-    setCurrentMagnification((prev: number) => prev - 0.1);
+    setCurrentMagnification((prev: number) => prev - TIMES);
   };
 
   useEffect(() => {

@@ -1,20 +1,4 @@
-type Coordinate = {
-  x: Number;
-  y: Number;
-};
-
-type Range = {
-  N: Number;
-  E: Number;
-  S: Number;
-  W: Number;
-};
-
-type RangeSet = {
-  order: number
-  range: Range;
-  coordinates: Array<Coordinate>;
-};
+import { Coordinate, RangeSet } from "../types";
 
 const checkPolygonRange = (coordinate: Coordinate, rangeSet: Array<RangeSet>): number | undefined => {
   for (let i = rangeSet.length - 1; i >= 0; i--) {

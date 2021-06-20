@@ -1,7 +1,4 @@
-type Coordinate = {
-  x: number;
-  y: number;
-};
+import { Coordinate } from "../types";
 
 const getCoordinates = (event: MouseEvent, canvas: HTMLCanvasElement | null): Coordinate | undefined => {
   if (canvas === null) return;

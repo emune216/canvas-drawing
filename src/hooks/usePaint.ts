@@ -10,23 +10,7 @@ import { RootState } from "../redux/store";
 import { addPolygon, deletePolygon } from "../redux/reducers/polygon";
 import { changeMagnification } from "../redux/reducers/canvasStatus";
 
-type Coordinate = {
-  x: number;
-  y: number;
-};
-
-type Range = {
-  N: Number;
-  E: Number;
-  S: Number;
-  W: Number;
-};
-
-type RangeSet = {
-  order: number;
-  range: Range;
-  coordinates: Array<Coordinate>;
-};
+import { Coordinate, Range, RangeSet } from "../types";
 
 let isDraw: Boolean = false;
 let isDelete: Boolean = false;

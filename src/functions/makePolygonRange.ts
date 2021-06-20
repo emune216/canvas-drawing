@@ -1,14 +1,4 @@
-type Coordinate = {
-  x: Number;
-  y: Number;
-};
-
-type Range = {
-  N: Number;
-  E: Number;
-  S: Number;
-  W: Number;
-};
+import { Coordinate, Range } from "../types";
 
 const makeRange = (range: Range, coordinate: Coordinate, init: Boolean): Range => {
   const { x, y } = coordinate;
