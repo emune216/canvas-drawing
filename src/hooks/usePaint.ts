@@ -98,6 +98,8 @@ const usePaint = () => {
     if (!isDelete) return;
     if (canvas === null) return;
 
+    dispatch(changeMagnification(1));
+
     const currentCoordinates: Coordinate | undefined = getCoordinates(event, canvas);
     if (!currentCoordinates) return;
 
