@@ -6,17 +6,14 @@ import ZoomOutIcon from "@material-ui/icons/ZoomOut";
 import Canvas from "./Canvas";
 import ZoomButton from "./ZoomButton";
 import DeleteCheckBox from "./DeleteCheckBox";
+import Inform from "./Inform";
+
+import useZoom from "../hooks/useZoom";
 
 import Wrapper from "./styles/elements/Wrapper";
 
 const Main = () => {
-  const zoomIn = () => {
-    console.log("In");
-  };
-
-  const zoomOut = () => {
-    console.log("Out");
-  };
+  const { zoomIn, zoomOut } = useZoom();
 
   return (
     <Wrapper>
@@ -32,6 +29,9 @@ const Main = () => {
           <div>
             <ZoomButton icon={<ZoomOutIcon />} onClick={zoomOut} />
           </div>
+        </div>
+        <div className="information-container">
+          <Inform />
         </div>
       </CanvasWrapper>
     </Wrapper>
@@ -63,6 +63,12 @@ const CanvasWrapper = styled.div`
     div:nth-child(1) {
       margin-bottom: 0.5rem;
     }
+  }
+
+  .information-container {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
   }
 `;
 
