@@ -6,7 +6,9 @@ const Inform = () => {
   const { currentMagnification } = useSelector((state: RootState) => state.canvasStatus);
 
   return (
-    <span>{`현재 캔버스 배율: ${currentMagnification.toFixed(1)}배`}</span>
+    <span
+      data-testid="inform-text"
+    >{`현재 캔버스 배율: ${currentMagnification.toFixed(1)}배`}</span>
   );
 };
 

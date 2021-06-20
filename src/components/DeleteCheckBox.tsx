@@ -15,6 +15,7 @@ const DeleteCheckBox = () => {
           type="checkbox"
           checked={checkBoxValue}
           onChange={handleChange}
+          aria-label="delete-check-box"
         />
         <span>Delete Mode</span>
       </Label>
