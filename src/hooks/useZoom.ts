@@ -5,7 +5,7 @@ import { changeMagnification, changeCurrentMagnification } from "../redux/reduce
 
 const ZOOM_IN: number = 1.1;
 const ZOOM_OUT: number = 0.9;
-const TIMES: number = 0.1
+const TIMES: number = 0.1;
 
 const useZoom = () => {
   const dispatch = useDispatch();
