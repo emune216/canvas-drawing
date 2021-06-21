@@ -1,14 +1,14 @@
 import { useState, useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
+import { RootState } from "../redux/store";
+import { addPolygon, deletePolygon } from "../redux/reducers/polygon";
+import { changeMagnification } from "../redux/reducers/canvasStatus";
+
 import getCoordinates from "../functions/getCoordinates";
 import drawLine from "../functions/drawLine";
 import checkPolygonRange from "../functions/checkPolygonRange";
 import makePolygonRange from "../functions/makePolygonRange";
-
-import { RootState } from "../redux/store";
-import { addPolygon, deletePolygon } from "../redux/reducers/polygon";
-import { changeMagnification } from "../redux/reducers/canvasStatus";
 
 import { Coordinate, Range, RangeSet } from "../types";
 

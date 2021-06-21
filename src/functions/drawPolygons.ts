@@ -1,20 +1,4 @@
-type Coordinate = {
-  x: number;
-  y: number;
-};
-
-type Range = {
-  N: Number;
-  E: Number;
-  S: Number;
-  W: Number;
-};
-
-type RangeSet = {
-  order: number;
-  range: Range;
-  coordinates: Array<Coordinate>;
-};
+import { RangeSet } from "../types";
 
 const draw = (
   context: CanvasRenderingContext2D,

@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 
-import Wrapper from "./styles/elements/Wrapper";
-
 import useCheckBox from "../hooks/useCheckBox";
+
+import Wrapper from "./styles/elements/Wrapper";
 
 const DeleteCheckBox = () => {
   const { checkBoxValue, handleChange } = useCheckBox();
